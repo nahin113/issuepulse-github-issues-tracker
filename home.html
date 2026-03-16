@@ -45,28 +45,62 @@
         <div class="navbar bg-base-100 shadow-sm">
           <div class="w-11/12 mx-auto sm:flex">
             <div class="flex-1 flex gap-2 items-center pb-3 sm:pb-0">
-            <img class="w-9" src="./assets/github-logo.png" alt="">
-            <h2 class="font-semibold text-2xl text-[#1F2937]">GitHub Issues Tracker</h2>
-          </div>
-          <div class="flex gap-2">
-            <input
-              type="text"
-              placeholder="Search"
-              class="input input-bordered w-24 md:w-auto"
-            />
-            <button class="btn btn-primary"><i class="fa-solid fa-plus"></i>New Issue</button>
-          </div>
+              <img class="w-9" src="./assets/github-logo.png" alt="" />
+              <h2 class="font-semibold text-2xl text-[#1F2937]">
+                GitHub Issues Tracker
+              </h2>
+            </div>
+            <div class="flex gap-2">
+              <input
+                type="text"
+                placeholder="Search"
+                class="input input-bordered w-24 md:w-auto"
+              />
+              <button class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i>New Issue
+              </button>
+            </div>
           </div>
         </div>
       </section>
     </header>
 
-    <main class="sm:w-9/12 mx-auto space-y-4">
-        <section id="tabs" class="bg-base-100 shadow-md p-6 gap-2 rounded-lg">
-            <button class="btn py-3 w-[120px] m-1">All</button>
-            <button class="btn py-3 w-[120px] m-1">Open</button>
-            <button class="btn py-3 w-[120px] m-1">Closed</button>
-        </section>
+    <main class="sm:w-9/12 mx-auto">
+      <section id="tabs" class="bg-base-100 shadow-md p-6 gap-2 rounded-lg">
+        <button class="btn btn-primary py-3 w-[120px] m-1">All</button>
+        <button class="btn py-3 w-[120px] m-1">Open</button>
+        <button class="btn py-3 w-[120px] m-1">Closed</button>
+      </section>
+
+      <section id="issues" class="mt-4 mb-1">
+        <div
+          class="issues-header bg-base-100 shadow-md p-6 rounded-t-lg flex items-center"
+        >
+          <div class="left flex-1 flex items-center gap-2">
+            <img
+              class="image p-3 rounded-full bg-[#ECE4FF]"
+              src="./assets/Aperture.png"
+              alt=""
+            />
+            <div class="txt">
+              <h2 class="font-semibold text-xl text-[#1F2937]">
+                <span id="total-issues">50</span> issues
+              </h2>
+              <p class="text-base text-[#64748B]">
+                Track and manage your project issues
+              </p>
+            </div>
+          </div>
+          <div class="right flex gap-4">
+            <p><i class="fa-solid fa-circle text-[#00A96E]"></i> Open</p>
+            <p><i class="fa-solid fa-circle text-[#A855F7]"></i> Closed</p>
+          </div>
+        </div>
+      </section>
+      <section class="bg-base-200 shadow-md p-6 rounded-b-lg">
+        <div id="cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+      </section>
     </main>
+    <script src="./script/issues.js"></script>
   </body>
 </html>
