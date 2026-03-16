@@ -56,17 +56,17 @@
             >Username</label
           >
           <br>
-          <input type="text" class="input w-full" placeholder="Enter Username" />
+          <input id="username-inp" type="text" class="input w-full" placeholder="Enter Username" />
           <p class="text-[#4A00FF] text-sm pb-4 pt-[6px]">Default: admin</p>
 
           <label class="label font-medium text-[#1F2937] text-base"
             >Password</label
           >
           <br>
-          <input type="password" class="input w-full" placeholder="Enter Password" />
+          <input id="password-inp" type="password" class="input w-full" placeholder="Enter Password" />
           <p class="text-[#4A00FF] text-sm pt-[6px]">Default: admin123</p>
         </div>
-        <button class="btn btn-primary text-base font-semibold">Sign In</button>
+        <button id="sign-in-btn" class="btn btn-primary text-base font-semibold">Sign In</button>
 
         <div class="flex items-center gap-4 text-[#E4E4E7]">
           <div class="flex-1 border-t"></div>
@@ -84,5 +84,6 @@
         </div>
       </fieldset>
     </section>
+    <script src="./script/auth.js"></script>
   </body>
 </html>
