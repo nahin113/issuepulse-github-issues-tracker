@@ -39,5 +39,50 @@
     <!-- stylesheet -->
     <link rel="stylesheet" href="./style/style.css" />
   </head>
-  <body></body>
+  <body class="bg-base-200">
+    <section id="sign-in" class="flex justify-center items-center h-lvh">
+      <fieldset
+        class="fieldset bg-base-100 border-base-300 rounded-box w-xs border p-8 space-y-6 shadow-md rounded-xl w-full md:min-w-[520px]"
+      >
+        <div id="title" class="text-center">
+          <img class="mx-auto pb-6" src="./assets/github-logo.png" alt="" />
+          <h2 class="pb-1 font-semibold text-2xl text-[#1F2937]">
+            GitHub Issues Tracker
+          </h2>
+          <p class="text-[#1F2937] text-base">Sign in to manage your issues</p>
+        </div>
+        <div id="inputs">
+          <label class="label font-medium text-[#1F2937] text-base"
+            >Username</label
+          >
+          <br>
+          <input type="text" class="input w-full" placeholder="Enter Username" />
+          <p class="text-[#4A00FF] text-sm pb-4 pt-[6px]">Default: admin</p>
+
+          <label class="label font-medium text-[#1F2937] text-base"
+            >Password</label
+          >
+          <br>
+          <input type="password" class="input w-full" placeholder="Enter Password" />
+          <p class="text-[#4A00FF] text-sm pt-[6px]">Default: admin123</p>
+        </div>
+        <button class="btn btn-primary text-base font-semibold">Sign In</button>
+
+        <div class="flex items-center gap-4 text-[#E4E4E7]">
+          <div class="flex-1 border-t"></div>
+          <span class="text-[#1F2937]">OR</span>
+          <div class="flex-1 border-t"></div>
+        </div>
+
+        <div id="demo" class="space-y-8 text-center">
+          <h4 class="text-[#64748B] text-sm">Demo Credentials:</h4>
+          <p class="text-[#1F2937] text-base"> <span class="font-semibold">Username:</span>
+             admin <br />
+             <span class="font-semibold">Password:</span>
+             admin123
+          </p>
+        </div>
+      </fieldset>
+    </section>
+  </body>
 </html>
