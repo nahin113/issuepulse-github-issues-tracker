@@ -9,7 +9,20 @@
 // title: "Fix navigation menu on mobile devices";
 // updatedAt: "2024-01-15T10:30:00Z";
 
+
+const manageSpinner = (status) => {
+  if (status) {
+    document.querySelector("#spinner").classList.remove("hidden");
+    document.querySelector("#details-container").classList.add("hidden");
+  } else {
+    document.querySelector("#details-container").classList.remove("hidden");
+    document.querySelector("#spinner").classList.add("hidden");
+  }
+};
+
+
 const renderCards = async (status) => {
+  manageSpinner(true)
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   const response = await fetch(url);
   const data = await response.json();
@@ -31,6 +44,7 @@ const renderCards = async (status) => {
     displayCards(openArr);
   }
   else displayCards(data.data);
+  manageSpinner(false)
 };
 
 const activeBtn= (status)=> {
@@ -55,6 +69,11 @@ const createElement = (arr) => {
   return htmlElements.join(" ");
 };
 
+const createImage = (status)=> {
+  if(status === 'open') return `<img class="w-[24px]" src="./assets/Open-Status.png" alt="" />`;
+  else return `<img class="w-[24px]" src="./assets/Closed-Status.png" alt="" />`;
+}
+
 const displayCards = (data) => {
   document.querySelector("#total-issues").innerText = data.length
   const cards = document.querySelector("#cards");
@@ -64,12 +83,12 @@ const displayCards = (data) => {
     const card = document.createElement("div");
 
     card.innerHTML = `
-    <div class="card gap-1 shadow-lg">
+    <div onclick="loadIssueDetail(${el.id})" class="card gap-1 shadow-lg">
   <div class="card-first bg-base-100 rounded-t-md p-4 space-y-3 border-t-4">
     <div class="card-status flex justify-between items-center">
-      <img class="w-[24px]" src="./assets/Open-Status.png" alt="" />
-      <p class="w-20 text-[#EF4444] bg-[#FEECEC] rounded-full text-center">
-        High
+      ${createImage(el.status)}
+      <p class="card-p w-20 rounded-full text-center">
+        ${el.priority.toUpperCase()}
       </p>
     </div>
     <div class="card-info space-y-2">
@@ -111,8 +130,70 @@ const displayCards = (data) => {
       cardStatus.classList.add("closed");
     }
 
+    const cardPriority = card.querySelector(".card-p");
+
+    if(el.priority === "high") cardPriority.classList.add("high")
+    else if(el.priority === "medium") cardPriority.classList.add("medium")
+    else if (el.priority === "low") cardPriority.classList.add("low")
+
     cards.append(card);
   });
 };
+
+
+
+const loadIssueDetail = async (id) => {
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+  );
+  const data = await res.json();
+  displayIssueDetails(data.data);
+};
+
+const displayIssueDetails = (issue) => {
+  const detailsContainer = document.querySelector("#details-container");
+  detailsContainer.innerHTML = `
+  <div class="space-y-2">
+    <h2 class="font-bold text-2xl">Fix broken image uploads</h2>
+    <div class="text-[#64748B] flex items-center gap-2 flex-wrap">
+      <p class="st-head p-2 text-xs font-medium text-white rounded-full">${issue.status.toUpperCase()}</p>
+      <img src="./assets/Ellipse 5.png" alt="">
+      <p>Opened by <span>${issue.author}</span></p>
+      <img src="./assets/Ellipse 5.png" alt="">
+      <p>${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
+    </div>
+    </div>
+    <div>${createElement(issue.labels)}</div>
+    <p class="text-[#64748B] text-base">${issue.description}</p>
+    <div class="modal-foot grid grid-cols-2 gap-[10px] p-4 bg-[#F8FAFC]">
+      <div class="m-left">
+        <p class="text-[#64748B] text-base">Assignee:</p>
+        <p class="font-semibold text-base text-[#1F2937]">${
+          issue.assignee.length ? issue.assignee : "Unassigned"
+        }</p>
+      </div>
+      <div class="m-right">
+        <p class="text-[#64748B] text-base">Priority:</p>
+        <p class="modal-pr px-3 py-[6px] text-xs font-medium bg-[#EF4444] inline text-white rounded-full">${issue.priority.toUpperCase()}</p>
+      </div>
+    </div>
+  `;
+
+  if(issue.status === "open")
+  {
+    detailsContainer.querySelector(".st-head").classList.add("status-open")
+  }
+  else {
+    detailsContainer.querySelector(".st-head").classList.add("status-close");
+  }
+
+
+  if (issue.priority === "high") detailsContainer.querySelector(".modal-pr").classList.add("high-modal");
+  else if (issue.priority === "medium") detailsContainer.querySelector(".modal-pr").classList.add("medium-modal");
+  else if (issue.priority === "low") detailsContainer.querySelector(".modal-pr").classList.add("low-modal");
+
+  document.querySelector("#issue_modal").showModal();
+};
+
 
 renderCards();

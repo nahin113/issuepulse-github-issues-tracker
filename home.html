@@ -67,9 +67,27 @@
 
     <main class="sm:w-9/12 mx-auto">
       <section id="tabs" class="bg-base-100 shadow-md p-6 gap-2 rounded-lg">
-        <button id="All" onclick="renderCards('All')" class="btn btn-primary py-3 w-[120px] m-1">All</button>
-        <button id="Open" onclick="renderCards('Open')" class="btn py-3 w-[120px] m-1">Open</button>
-        <button id="Closed" onclick="renderCards('Closed')" class="btn py-3 w-[120px] m-1">Closed</button>
+        <button
+          id="All"
+          onclick="renderCards('All')"
+          class="btn btn-primary py-3 w-[120px] m-1"
+        >
+          All
+        </button>
+        <button
+          id="Open"
+          onclick="renderCards('Open')"
+          class="btn py-3 w-[120px] m-1"
+        >
+          Open
+        </button>
+        <button
+          id="Closed"
+          onclick="renderCards('Closed')"
+          class="btn py-3 w-[120px] m-1"
+        >
+          Closed
+        </button>
       </section>
 
       <section id="issues" class="mt-4 mb-1">
@@ -98,8 +116,23 @@
         </div>
       </section>
       <section class="bg-base-200 shadow-md p-6 rounded-b-lg">
-        <div id="cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+        <div id="cards" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"></div>
       </section>
+
+      <section id="spinner" class="flex justify-center items-center py-40">
+        <span class="loading loading-spinner loading-xl w-40"></span>
+      </section>
+
+      <dialog id="issue_modal" class="modal">
+        <div class="modal-box">
+          <div id="details-container" class="p-8 space-y-6"></div>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn btn-primary">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
     <script src="./script/issues.js"></script>
   </body>
