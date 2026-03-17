@@ -9,12 +9,43 @@
 // title: "Fix navigation menu on mobile devices";
 // updatedAt: "2024-01-15T10:30:00Z";
 
-const renderCards = async () => {
+const renderCards = async (status) => {
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   const response = await fetch(url);
   const data = await response.json();
-  displayCards(data.data);
+
+  if(status === 'All') { 
+    activeBtn(status)
+    displayCards(data.data);
+  }
+  else if (status === 'Open') {
+    activeBtn(status);
+    const openData = data.data
+    let openArr = openData.filter(data => data.status === 'open')
+    displayCards(openArr)
+  }
+  else if(status === 'Closed') {
+    activeBtn(status);
+    const openData = data.data;
+    let openArr = openData.filter((data) => data.status === "closed");
+    displayCards(openArr);
+  }
+  else displayCards(data.data);
 };
+
+const activeBtn= (status)=> {
+  const allBtn = document.querySelector("#All")
+  const openBtn = document.querySelector("#Open")
+  const closedBtn = document.querySelector("#Closed")
+
+  allBtn.classList.remove("btn-primary");
+  openBtn.classList.remove("btn-primary");
+  closedBtn.classList.remove("btn-primary");
+
+  const target = document.querySelector(`#${status}`)
+  target.classList.add("btn-primary");
+
+}
 
 const createElement = (arr) => {
   const htmlElements = arr.map(
@@ -25,6 +56,7 @@ const createElement = (arr) => {
 };
 
 const displayCards = (data) => {
+  document.querySelector("#total-issues").innerText = data.length
   const cards = document.querySelector("#cards");
   cards.innerHTML = "";
 
@@ -70,6 +102,14 @@ const displayCards = (data) => {
   </div>
 </div>
     `;
+
+    const cardStatus = card.querySelector(".card-first");
+
+    if (el.status === "open") {
+      cardStatus.classList.add("open");
+    } else {
+      cardStatus.classList.add("closed");
+    }
 
     cards.append(card);
   });
