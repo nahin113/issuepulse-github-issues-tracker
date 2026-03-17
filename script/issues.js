@@ -47,18 +47,20 @@ const renderCards = async (status) => {
   manageSpinner(false)
 };
 
-const activeBtn= (status)=> {
-  const allBtn = document.querySelector("#All")
-  const openBtn = document.querySelector("#Open")
-  const closedBtn = document.querySelector("#Closed")
+const removeActive = () => {
+  const allBtn = document.querySelector("#All");
+  const openBtn = document.querySelector("#Open");
+  const closedBtn = document.querySelector("#Closed");
 
   allBtn.classList.remove("btn-primary");
   openBtn.classList.remove("btn-primary");
   closedBtn.classList.remove("btn-primary");
+};
 
+const activeBtn= (status)=> {
+  removeActive()
   const target = document.querySelector(`#${status}`)
   target.classList.add("btn-primary");
-
 }
 
 const createElement = (arr) => {
